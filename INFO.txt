@@ -1,0 +1,56 @@
+Descriere
+
+Aplicatia consta in dezvoltarea unui backend pentru gestionarea locurilor unde se pot practica sporturi/activitati
+si pentru a ajuta oamenii sa aleaga perioada cea mai buna in care pot merge acolo.In cadrul unui loc se pot practica
+mai multe tipuri de sporturi/activitati si fiecare are o perioada din an in care poate fi practicat
+(ex. schi dec-feb; parapanta mai-aug; ATV tot anul; etc) si un cost mediu per zi de practicat.Locurile apartin de o structura
+ierarhica ce cuprinde tari, regiuni, localitati. Acest lucru imi va permite sa caut o vacanta la schi in Romania sau in regiunea
+Brasovului sau doar in Predeal, in perioada feb-mar.
+
+Cel ce gestioneaza aplicatia trebuie sa:
+	-poata vedea informatii din toate tabelele
+	-poata cauta un anunt dupa un anumit sport
+	-poata cauta un anunt dupa o perioada data
+	-poata sa stearga un anunt
+	-poata sa modifice pretul unui anunt
+	-poata sa adauge un anunt
+
+Servicii:
+	-Tari get service
+	-Localitati get service
+	-regiuni get service
+	-anunturi get service
+	-anunturi delete service
+	-anunturi post service
+	-anunturi put service
+
+Endpoint-uri:
+
+<--GET-->
+/tari -> afiseaza informatii despre toate tarile
+/tari/{id} -> afiseaza informatii despre o tara dupa un id dat (parametru id)
+
+<--GET-->
+/regiuni ->afiseaza informatii despre toate regiunile
+/regiuni/{id} -> afiseaza informatii despre o regiune dupa un id dat (parametru id)
+
+<--GET-->
+/localitati -> afiseaza informatii despre toate localitatile
+/localitati/{id} -> afiseaza informatii despre o localitate dupa un id dat (parametru id)
+
+<--GET-->
+/anunturi -> afiseaza informatii despre toate anunturile
+/anunturi/{id} -> afiseaza informatii despre un anunt dupa un id dat (parametru id)
+/anunturi/sport/{sport} -> afiseaza toate anunturile dupa sportul practicat, acesta fiind dat ca parametru (parametru sport)
+/anunturi/date/{dataIn}/{dataOut} -> afiseaza toate anunturile dintre cele doua perioade date (parametru dataIn si dataOut)
+
+<--DELETE-->
+/anunturi/{id} -> stergerea unui anunt dupa un id dat (parametru id)
+
+<--PUT-->
+/anunturi/pretById -> modificarea pretului unui anunt dupa un id dat ( parametru id si pret trimise prin body)
+
+<--POST-->
+/anunturi -> adaugarea unui anunt ( parametri : monthInAnunt, monthOutAnun, pretAnunt, sportAnunt, idLocalitateAnunt, idRegiuneAnunt, idTaraAnunt)
+
+

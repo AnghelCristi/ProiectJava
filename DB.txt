@@ -1,0 +1,146 @@
+4 tabele:
+-tari
+-regiuni
+-localitati
+-anunturi
+
+Unde:
+
+tabela tari:
+-id_tara(cheie principala, unic, tip: long)
+-nume_tara(unic, tip: string)
+
+tabela regiuni:
+-id_regiune(cheie principala, unic, tip: long)
+-nume_regiune(unic, tip: string)
+-id_tara(cheie straina, tip: long, referire la id_tara din tabela tari)
+
+tabela localitati:
+-id_localitate(cheie principala, unic, tip: long)
+-nume_localitate(unic, tip: string)
+-id_regiune(cheie straina, tip: long, referinta la id_regiune din tabela regiuni)
+-id_tara(cheie straina, tip: long, referinta la id_tara din tabela tari)
+
+tabele anunturi:
+-id_unic(cheie principala, unic, tip: long)
+-id_tara(cheie straina, tip: long, referinta la id_tara din tabela tari)
+-id_regiune(cheie straina, tip: long, referinta la id_regiune din tabela regiuni)
+-id_localitate(cheie straina, tip: long, referinta la id_localitate din tabela localitati)
+-sport(tip: string)
+-monthIn(tip: long)
+-monthOut(tip: long)
+-pret(tip: double)
+
+
+Relatiile dintre tabele:
+
+tabela tari --1:n-- tabela regiuni(many to one bidirectional)
+tabela regiuni --1:n-- tabela localitati(many to one bidirectional)
+tabela tari --1:n-- tabela localitati(many to one bidirectional)
+
+tabela tari --1:n-- tabela anunturi (many to one unidirectional)
+tabela regiuni --1:n-- tabela anunturi(many to one unidirectional)
+tabela localitati --1:n-- tabela anunturi(many to one unidirectional)
+
+
+
+Populare baza de date cu valori:
+
+create database SportsAPI;
+
+INSERT INTO tari (id_tara, nume_tara)
+VALUES (1,"Romania");
+INSERT INTO tari (id_tara, nume_tara)
+VALUES (2,"Austria");
+INSERT INTO tari (id_tara, nume_tara)
+VALUES (3,"Elvetia");
+
+select * from tari;
+
+INSERT INTO regiuni (id_regiune, nume_regiune, id_tara)
+VALUES (1, "Brasov", 1);
+INSERT INTO regiuni (id_regiune, nume_regiune, id_tara)
+VALUES (2, "Constanta", 1);
+INSERT INTO regiuni (id_regiune, nume_regiune, id_tara)
+VALUES (3, "Tirol", 2);
+INSERT INTO regiuni (id_regiune, nume_regiune, id_tara)
+VALUES (4, "Vorarlberg", 2);
+INSERT INTO regiuni (id_regiune, nume_regiune, id_tara)
+VALUES (5, "Valais", 3);
+INSERT INTO regiuni (id_regiune, nume_regiune, id_tara)
+VALUES (6, "Vaud", 3);
+
+select * from regiuni;
+
+INSERT INTO localitati (id_localitate, nume_localitate, id_regiune, id_tara)
+VALUES (1, "Poiana Brasov", 1, 1);
+INSERT INTO localitati (id_localitate, nume_localitate, id_regiune, id_tara)
+VALUES (2, "Sinaia", 1, 1);
+INSERT INTO localitati (id_localitate, nume_localitate, id_regiune, id_tara)
+VALUES (3, "Predeal", 1, 1);
+INSERT INTO localitati (id_localitate, nume_localitate, id_regiune, id_tara)
+VALUES (4, "Mamaia", 2, 1);
+INSERT INTO localitati (id_localitate, nume_localitate, id_regiune, id_tara)
+VALUES (5, "Vama Veche", 2, 1);
+INSERT INTO localitati (id_localitate, nume_localitate, id_regiune, id_tara)
+VALUES (6, "Eforie Sud", 2, 1);
+INSERT INTO localitati (id_localitate, nume_localitate, id_regiune, id_tara)
+VALUES (7, "Innsbruck", 3, 2);
+INSERT INTO localitati (id_localitate, nume_localitate, id_regiune, id_tara)
+VALUES (8, "Soelden", 3, 2);
+INSERT INTO localitati (id_localitate, nume_localitate, id_regiune, id_tara)
+VALUES (9, "Bregenz", 4, 2);
+INSERT INTO localitati (id_localitate, nume_localitate, id_regiune, id_tara)
+VALUES (10, "Sion", 5, 3);
+INSERT INTO localitati (id_localitate, nume_localitate, id_regiune, id_tara)
+VALUES (11, "Lausanne", 6, 3);
+
+select * from localitati;
+
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (1, 12, 2, 450, "ski", 1, 1, 1);
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (2, 12, 2, 300, "atv", 1, 1, 1);
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (3, 12, 2, 250, "ski", 2, 1, 1);
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (4, 12, 2, 120, "atv", 2, 1, 1);
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (5, 12, 2, 300, "ski", 3, 1, 1);
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (6, 12, 2, 150, "atv", 3, 1, 1);
+
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (7, 6, 8, 500, "skijet", 4, 2, 1);
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (8, 6, 8, 400, "croaziera", 4, 2, 1);
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (9, 6, 8, 300, "croaziera", 5, 2, 1);
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (10, 6, 8, 200, "croaziera", 6, 2, 1);
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (11, 6, 8, 180, "skijet", 6, 2, 1);
+
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (12, 12, 2, 700, "ski", 7, 3, 2);
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (13, 12, 2, 400, "atv", 7, 3, 2);
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (14, 12, 2, 600, "ski", 8, 3, 2);
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (15, 12, 2, 380, "atv", 8, 3, 2);
+
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (16, 12, 2, 650, "ski", 9, 4, 2);
+
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (17, 12, 2, 800, "ski", 10, 5, 3);
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (18, 12, 2, 600, "atv", 10, 5, 3);
+
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (19, 12, 2, 900, "ski", 11, 6, 3);
+INSERT INTO anunturi (id_anunt, month_in, month_out, pret, sport, id_localitate, id_regiune, id_tara)
+VALUES (20, 12, 2, 750, "atv", 11, 6, 3);
+
+select * from anunturi;
